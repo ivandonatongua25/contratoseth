@@ -105,7 +105,16 @@ contract CCNFT is ERC721Enumerable, Ownable, ReentrancyGuard {
 
 // Parametro value: El valor de cada NFT que se está comprando.
 // Parametro amount: La cantidad de NFTs que se quieren comprar.
-    function buy() external nonReentrant {
+    function buy(address recipient, uint256 amount) external nonReentrant {
+        uint256 senderBalance = _balances[msg.sender];
+    require(
+            senderBalance >= amount,
+           
+);
+_balances[msg.sender] = senderBalance - amount;
+_balances[recipient] += amount;
+return true;
+}
         require(); // Verificación de permisos de la compra con "canBuy". Incluir un mensaje de falla.
         
 // Verificacón de la cantidad de NFTs a comprar sea mayor que 0 y menor o igual al máximo permitido (maxBatchCount). Incluir un mensaje de falla.
